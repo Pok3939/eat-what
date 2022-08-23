@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 .App {
   text-align: center;
 }
@@ -13,16 +15,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 .App-link {
   color: #61dafb;
@@ -37,8 +29,20 @@
   }
 }
 
+.Heading{
+  font-size: 5rem;
+  font-family: 'Lobster', cursive;
+}
+.blackBar{
+  width: 100vw;
+  height: 0.3rem;
+  background-color: black;
+}
 .layout2{
-  background-color: green;
   background-image: url(../public/huge.jpg);
+}
+.RefreshButton{
+  height: 2rem;
+  width: 2rem;
 }
 
