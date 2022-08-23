@@ -13,7 +13,7 @@
   }
 }
 
-.App-header{
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,7 +23,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
 
 .App-link {
   color: #61dafb;
@@ -42,3 +41,4 @@
   background-color: green;
   background-image: url(../public/huge.jpg);
 }
+
