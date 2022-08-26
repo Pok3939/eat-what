@@ -14,12 +14,11 @@
   background-color: black;
 }
 
-.RefreshButton{
-  height: 2rem;
-  width: 2rem;
-}
-
-
 .TickBox1{
   outline: 2px solid grey;
+}
+
+.RefreshButton >img {
+  width:3rem;
+  height:3rem;
 }

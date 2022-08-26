@@ -11,6 +11,9 @@ function RestaurantPage() {
                 <Col sm={8}>
                     <Row>
                         <Col sm={12}><img src='./Food1.jpg'></img></Col>
+                        
+                    </Row>
+                    <Row>
                         <Col sm={4}><img src='./Menu1.jpg'></img></Col>
                         <Col sm={4}><img src='./Food2.jpg'></img></Col>
                         <Col sm={4}><img src='./Food3.jpg'></img></Col>

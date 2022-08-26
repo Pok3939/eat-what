@@ -34,7 +34,7 @@ function App() {
           {/* <div className='GridPhoto'><Grid rowHeight={20} /></div> */}
           {/* <NestedGrid/> */}
         </div>
-        <button className='RefreshButton' onClick={Refresh}>🔄</button>
+        <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
         
       </header>
       <text>-----------------Breakline-----------------</text>

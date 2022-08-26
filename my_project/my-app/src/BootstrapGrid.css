@@ -1,5 +1,5 @@
 .col >img{
-outline: 2px solid black;
+outline: 1.8px solid black;
 }
 
 
@@ -9,3 +9,14 @@ outline: 2px solid black;
     transition: 0.2s;
     transform:scale(1.07, 1.07);
   }
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}

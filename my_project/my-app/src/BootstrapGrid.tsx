@@ -4,19 +4,31 @@ import Col from 'react-bootstrap/Col';
 import './BootstrapGrid.css'
 
 function ResponsiveAutoExample() {
-  return (
-    <Container>
-      <Row>
-        <Col><img src ='./grid1.jpg'></img><img src ='./grid2.jpg'></img><img src ='./grid3.jpg'></img></Col>
-      </Row>
-      <Row>
-        <Col><img src ='./grid4.jpg'></img><img src ='./grid5.jpg'></img><img src ='./grid6.jpg'></img></Col>
-      </Row>
-      <Row>
-        <Col><img src ='./grid7.jpg'></img><img src ='./grid8.jpg'></img><img src ='./grid9.jpg'></img></Col>
-      </Row>
+    return (
+        <Container>
+            <Row>
+                <Col>
+                    <img src='./grid1.jpg' />
+                    <img src='./grid2.jpg' />
+                    <img src='./grid3.jpg' />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <img src='./grid4.jpg' />
+                    <img src='./grid5.jpg' />
+                    <img src='./grid6.jpg' />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <img src='./grid7.jpg' />
+                    <img src='./grid8.jpg' />
+                    <img src='./grid9.jpg' />
+                </Col>
+            </Row>
 
-      {/* <Row>
+            {/* <Row>
         <Col sm><img src ='./huge.jpg'></img></Col>
         <Col sm><img src ='./huge.jpg'></img></Col>
         <Col sm><img src ='./huge.jpg'></img></Col>
@@ -31,9 +43,9 @@ function ResponsiveAutoExample() {
         <Col sm><img src ='./huge.jpg'></img></Col>
         <Col sm><img src ='./huge.jpg'></img></Col>
       </Row> */}
-      
-    </Container>
-  );
+
+        </Container>
+    );
 }
 
 export default ResponsiveAutoExample;
