@@ -1,13 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import '../node_modules/react-grid-layout/css/styles.css'
-import '../node_modules/react-resizable/css/styles.css'
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Grid from './photo9Grid'
-import NestedGrid from './MUIGrid'
+import Container from './BootstrapGrid'
+import RestaurantPage from './RestaurantPage'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
@@ -32,13 +30,15 @@ function App() {
 
       <header className="App-header">
         <div className="GridPhoto">
-          <div className='GridPhoto'><Grid rowHeight={20} /></div>
+          <Container/>
+          {/* <div className='GridPhoto'><Grid rowHeight={20} /></div> */}
           {/* <NestedGrid/> */}
         </div>
         <button className='RefreshButton' onClick={Refresh}>🔄</button>
-
+        
       </header>
-
+      <text>-----------------Breakline-----------------</text>
+        <RestaurantPage/>
     </div>
 
   );
