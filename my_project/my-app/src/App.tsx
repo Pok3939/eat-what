@@ -38,7 +38,7 @@ function App() {
         
       </header>
       <text>-----------------Breakline-----------------</text>
-        <RestaurantPage/>
+        {/* <RestaurantPage/> */}
     </div>
 
   );

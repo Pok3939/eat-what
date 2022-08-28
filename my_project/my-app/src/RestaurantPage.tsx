@@ -4,9 +4,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-function RestaurantPage() {
+interface Props {
+    text: string;
+  }
+  
+  const Banner = ({ text }: Props) => {
+    return <h1>Hello, {text}</h1>;
+  };
+
+function RestaurantPage({ text }: Props) {
     return (
         <Container>
+            {text}
             <Row>
                 <Col sm={8}>
                     <Row>

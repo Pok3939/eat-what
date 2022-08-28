@@ -1,9 +1,9 @@
-.col >img{
+.col > a>img{
 outline: 1.8px solid black;
 }
 
 
-.col >img:hover {
+.col >a >img:hover {
     /* opacity: 80%; */
     transform:scale(1, 1);
     transition: 0.2s;
