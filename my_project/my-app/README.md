@@ -10,3 +10,7 @@ Version 1.0
 Version 1.1
 - login user
 - create database
+
+
+yarn add @types/react
+yarn add @types/react-bootstrap

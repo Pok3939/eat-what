@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link, BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import './BootstrapGrid.css'
 import RestaurantPage from './RestaurantPage';
 
@@ -49,12 +49,12 @@ function BootstrapGrid() {
                         </Link>
                     </Col>
                 </Row>
-            <Routes>
+            {/* <Routes>
                 <Route path ='/restaurantpage1' element ={<RestaurantPage text='1'/>}>
                 </Route>
                 <Route path ='/restaurantpage2' element ={<RestaurantPage text='2'/>}>
                 </Route>
-            </Routes>
+            </Routes> */}
             </BrowserRouter>
             
         </Container>
