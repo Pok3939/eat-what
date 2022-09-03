@@ -16,7 +16,15 @@ function Refresh() {
 
 function App(){
   return(
-    <Home/>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path ='/' element ={<Home/>}></Route>
+        <Route path ='/restaurantpage1' element ={<RestaurantPage/>}></Route>
+        <Route path ='/restaurantpage2' element ={<RestaurantPage/>}></Route>
+      </Routes>
+    </BrowserRouter></>
+    
   )
 }
 export default App;

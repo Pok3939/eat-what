@@ -31,15 +31,7 @@ function Home() {
         <header className="App-header">
           <div className="GridPhoto">
             <Container/>
-          </div>
-            <BrowserRouter>
-            <Routes>
-                  <Route path ="/restaurantpage1" element ={<RestaurantPage/>}>
-                  </Route>
-                  <Route path ="/restaurantpage2" element ={<RestaurantPage/>}>
-                  </Route>
-              </Routes></BrowserRouter>           
-                
+          </div>  
           <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
           
         </header>
