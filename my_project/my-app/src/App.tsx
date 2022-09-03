@@ -9,55 +9,23 @@ import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-
-function Refresh() {
-  alert('Refresh new photos');
-} 
-
 function App(){
+  let totalDisplayPhotos = 9
   return(
-    <>
     <BrowserRouter>
       <Routes>
         <Route path ='/' element ={<Home/>}></Route>
-        <Route path ='/restaurantpage1' element ={<RestaurantPage/>}></Route>
-        <Route path ='/restaurantpage2' element ={<RestaurantPage/>}></Route>
+        <Route path ='/restaurantpage1' element ={<RestaurantPage text="1"/>}></Route>
+        <Route path ='/restaurantpage2' element ={<RestaurantPage text="2"/>}></Route>
+        <Route path ='/restaurantpage3' element ={<RestaurantPage text="3"/>}></Route>
+        <Route path ='/restaurantpage4' element ={<RestaurantPage text="4"/>}></Route>
+        <Route path ='/restaurantpage5' element ={<RestaurantPage text="5"/>}></Route>
+        <Route path ='/restaurantpage6' element ={<RestaurantPage text="6"/>}></Route>
+        <Route path ='/restaurantpage7' element ={<RestaurantPage text="7"/>}></Route>
+        <Route path ='/restaurantpage8' element ={<RestaurantPage text="8"/>}></Route>
+        <Route path ='/restaurantpage9' element ={<RestaurantPage text="9"/>}></Route>
       </Routes>
-    </BrowserRouter></>
-    
+    </BrowserRouter>
   )
 }
 export default App;
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <text className='Heading'> Eat What?</text>
-//       <div className='BlackBar'></div>
-//       <div className='dishChoice'>
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="日本菜" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="韓國菜" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="泰國菜" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中東菜" />
-//         <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="西餐" />
-//       </div>
-
-//       <header className="App-header">
-//         <div className="GridPhoto">
-//           <Container/>
-//         </div>
-//               <Routes>
-//                 <Route path ="/restaurantpage1" element ={<RestaurantPage/>}>
-//                 </Route>
-//                 <Route path ="/restaurantpage2" element ={<RestaurantPage/>}>
-//                 </Route>
-//             </Routes>
-//         <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
-        
-//       </header>
-//     </div>
-
-//   );
-// }

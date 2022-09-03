@@ -7,20 +7,20 @@ import RestaurantPage from './RestaurantPage';
 
 
 function BootstrapGrid() {
+let arrays = [
+    {id: 1, photo1:"/restaurantpage1", photo2:"./grid1.jpg"},
+    {id: 2, photo1:"/restaurantpage2", photo2:"./grid2.jpg"},
+    {id: 3, photo1:"/restaurantpage3", photo2:"./grid3.jpg"},
+]
     return (
         <Container>
-            <BrowserRouter>
                 <Row>
                     <Col>
-                        <Link to='/restaurantpage1'>
-                            <img src='./grid1.jpg' />
-                        </Link>
-                        <Link to='/restaurantpage2'>
-                            <img src='./grid2.jpg' />
-                        </Link>
-                        <Link to='/restaurantpage3'>
-                            <img src='./grid3.jpg' />
-                        </Link>
+                    {arrays.map((elem) => (
+                    <Link to ={elem.photo1}>
+                        <img src ={elem.photo2}/>
+                    </Link>
+                    ))}
                     </Col>
                 </Row>
                 <Row>
@@ -49,14 +49,6 @@ function BootstrapGrid() {
                         </Link>
                     </Col>
                 </Row>
-            {/* <Routes>
-                <Route path ='/restaurantpage1' element ={<RestaurantPage text='1'/>}>
-                </Route>
-                <Route path ='/restaurantpage2' element ={<RestaurantPage text='2'/>}>
-                </Route>
-            </Routes> */}
-            </BrowserRouter>
-            
         </Container>
     );
 }
