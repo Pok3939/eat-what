@@ -10,7 +10,7 @@ Version 1.0
 Version 1.1
 - login user
 - create database
-
+- create admin login for editing
 
 yarn add @types/react
 yarn add @types/react-bootstrap

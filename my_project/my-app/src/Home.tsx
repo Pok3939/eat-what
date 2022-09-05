@@ -21,6 +21,7 @@ function Home() {
         <div className='dishChoice'>
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
+          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="台灣菜" />
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="日本菜" />
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="韓國菜" />
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="泰國菜" />
