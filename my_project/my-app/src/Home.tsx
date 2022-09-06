@@ -34,7 +34,11 @@ function Home() {
             <Container/>
           </div>  
           <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
-          
+          <form action="http://localhost:8080/login" method="post">
+          <input type="text" name="username"/>
+          <input type="text" name="password"/>
+          <button type="submit">Login</button>
+          </form>
         </header>
       </div>
   
