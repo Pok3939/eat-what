@@ -14,3 +14,11 @@ Version 1.1
 
 yarn add @types/react
 yarn add @types/react-bootstrap
+
+Designer requirement:
+- 置頂search bar, 菜式, 地區
+- 飲食記錄 加在主頁(最近10次or more 光顧的餐廳, 日子)
+- 餐廳頁面參考airbnb
+- 置頂logo, 每一頁都有, 而且返home page
+- dark mode if 有時間
+- home page mouse page 有資料preview
