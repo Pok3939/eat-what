@@ -17,8 +17,11 @@ yarn add @types/react-bootstrap
 
 Designer requirement:
 - 置頂search bar, 菜式, 地區
-- 飲食記錄 加在主頁(最近10次or more 光顧的餐廳, 日子)
+- 強烈建議加login, 寫返2個role, admin role, user role
+- 飲食記錄 (有註冊先可以做到), 自己對餐廳嘅comment 加在主頁(最近10次or more 光顧的餐廳, 日子)
+- google map 食過嘅餐廳嘅座標(marker), 指埋去有comment
 - 餐廳頁面參考airbnb
 - 置頂logo, 每一頁都有, 而且返home page
 - dark mode if 有時間
-- home page mouse page 有資料preview
+- home page mouse hover 有資料preview
+- 

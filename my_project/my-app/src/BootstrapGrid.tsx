@@ -17,7 +17,7 @@ let arrays = [
                 <Row>
                     <Col>
                     {arrays.map((elem) => (
-                    <Link to ={elem.photo1}>
+                    <Link key={elem.id} to ={elem.photo1}>
                         <img src ={elem.photo2}/>
                     </Link>
                     ))}

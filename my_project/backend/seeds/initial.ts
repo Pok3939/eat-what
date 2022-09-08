@@ -1,10 +1,10 @@
 import { Knex } from "knex";
-
+import { hashPassword } from "../hash"
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
   await knex("restaurant").del();
   await knex("dishes_id").del();
-
+  await knex("users").del();
   // Inserts seed entries
   const ids = await knex("dishes_id")
     .insert([
@@ -18,7 +18,10 @@ export async function seed(knex: Knex): Promise<void> {
       { dishes: "western" },
     ])
     .returning("id");
-
+  await knex("users").insert({
+    username: "admin",
+    password: await hashPassword("123123")
+  })
   await knex("restaurant").insert({
     restaurant_name: "ABC Restaurant",
     restaurant_icon: "grid1.jpg",

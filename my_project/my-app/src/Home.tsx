@@ -5,18 +5,28 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Container from './BootstrapGrid';
 import RestaurantPage from './RestaurantPage';
-import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import { Link, BrowserRouter, Routes, Route, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { loggedOut } from './auth/action'
+import { RootState } from './store'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Refresh() {
     alert('Refresh new photos');
   } 
 
-function Home() {
+export default function Home() {
+    const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
+    console.log("isLoggedIn:",isLoggedIn);
+    
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
     return (
       <div className="App">
-        <text className='Heading'> Eat What?</text>
+        <div className='Heading'> Eat What?</div>
         <div className='BlackBar'></div>
         <div className='dishChoice'>
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
@@ -34,15 +44,16 @@ function Home() {
             <Container/>
           </div>  
           <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
-          <form action="http://localhost:8080/login" method="post">
-          <input type="text" name="username"/>
-          <input type="text" name="password"/>
-          <button type="submit">Login</button>
-          </form>
+          <NavLink to="/login">Login</NavLink>
+          { ! isLoggedIn && <NavLink to="/edit">Edit</NavLink> }
+          { ! isLoggedIn && <NavLink to="/login">Login</NavLink> }
+        { isLoggedIn === true && <a href="#" onClick={() => {
+          dispatch(loggedOut());
+          navigate('/')
+        }}>Logout</a> }
         </header>
+      <Outlet />
       </div>
   
     );
   }
-
-  export default Home;
