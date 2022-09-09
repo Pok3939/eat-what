@@ -5,6 +5,7 @@ import { formidable } from "formidable";
 import Knex from "knex";
 import fs from "fs";
 import { checkPassword } from './hash';
+import { hash } from 'bcryptjs'
 
 const knexConfig = require("./knexfile");
 const knex = Knex(knexConfig[process.env.NODE_ENV ?? "development"]);
@@ -74,7 +75,34 @@ app.post("/edit", (req: any, res: any) => {
     }
   });
 });
-//login for admin only//
+
+app.post('/register', (req, res) => {
+  form.parse(req, async (err, fields) => {
+
+    const trx = await knex.transaction();
+    // const user = await knex.select("id", "username")
+    // .from("users")
+    // .where("username", req.body.username);
+    try {
+      console.log(fields['username'], fields['password'])
+      
+      await trx.insert({
+      username: fields['username'],
+      password: await hash(fields['password'] as string, 10),
+    }).into('users').returning('id');
+    await trx.commit();
+    res.json({result: 'ok'})
+  }catch (e) {
+    console.log(e);
+    await trx.rollback();
+    res.json({result: 'error'})
+  } 
+  // if(req.body.username === user[0].username){
+  //   res.status(404).json({ result: "duplicate_username"})
+  // }
+})
+});
+
 app.get("/", (req, res) => {
   res.status(401).json({ result: "unauthorized" });
 });
@@ -90,7 +118,7 @@ app.post("/login", async (req, res) => {
   console.log("req.body.password", req.body.password, user[0].password);
     if (await checkPassword(req.body.password, user[0].password)) {
     req.session['userId'] = user[0].id
-    return res.json({ id: user[0].id });
+    return res.json({ id: user[0].id, username: user[0].username });
   } else {
     return res.status(400).json({ result: "wrong_password" });
   }
@@ -114,12 +142,12 @@ app.get("/users", isLogin, async (req, res) => {
     .from("users")
     .where("id", "!=", req.session["userId"]);
 
-  for (const user of users) {
-    user.languages = await knex
-      .select("programming_language_id")
-      .from("users_programming_languages")
-      .where("user_id", user.id);
-  }
+  // for (const user of users) {
+  //   user.languages = await knex
+  //     .select("programming_language_id")
+  //     .from("users_programming_languages")
+  //     .where("user_id", user.id);
+  // }
 
   res.json(users);
 });

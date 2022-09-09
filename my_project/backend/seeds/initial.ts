@@ -5,6 +5,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex("restaurant").del();
   await knex("dishes_id").del();
   await knex("users").del();
+  await knex("userrecord").del();
   // Inserts seed entries
   const ids = await knex("dishes_id")
     .insert([
@@ -32,5 +33,11 @@ export async function seed(knex: Knex): Promise<void> {
     restaurant_photo3: "grid3.jpg",
     restaurant_menu: "Menu1.jpg",
     restaurant_dishes_id: ids[0].id,
-  });
+  })
+  // await knex("userrecord").insert({
+  //   restaurant_name: "AAA Restaurant",
+  //   dishes: "Chinese",
+  //   comment: "tasty, will come back soon",
+  //   rate:"7.5"
+  // })
 }

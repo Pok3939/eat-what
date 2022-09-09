@@ -4,6 +4,7 @@ import './App.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Container from './BootstrapGrid';
+import Headbar from './Headbar'
 import RestaurantPage from './RestaurantPage';
 import { Link, BrowserRouter, Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { loggedOut } from './auth/action'
 import { RootState } from './store'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -26,8 +28,7 @@ export default function Home() {
     const navigate = useNavigate();
     return (
       <div className="App">
-        <div className='Heading'> Eat What?</div>
-        <div className='BlackBar'></div>
+        <Headbar/>
         <div className='dishChoice'>
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
           <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
@@ -44,9 +45,10 @@ export default function Home() {
             <Container/>
           </div>  
           <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
-          <NavLink to="/login">Login</NavLink>
-          { ! isLoggedIn && <NavLink to="/edit">Edit</NavLink> }
-          { ! isLoggedIn && <NavLink to="/login">Login</NavLink> }
+          <NavLink to="/login">Login</NavLink><br></br>
+          { ! isLoggedIn && <NavLink to="/register">Register</NavLink> }<br></br>
+          { ! isLoggedIn && <NavLink to="/edit">Edit</NavLink> }<br></br>
+          { ! isLoggedIn && <NavLink to="/userrecord">Record</NavLink> }
         { isLoggedIn === true && <a href="#" onClick={() => {
           dispatch(loggedOut());
           navigate('/')
@@ -54,6 +56,5 @@ export default function Home() {
         </header>
       <Outlet />
       </div>
-  
     );
   }

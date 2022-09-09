@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { loggedIn } from './auth/action';
+import Headbar from './Headbar'
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -9,9 +10,10 @@ export default function Login() {
     const dispatch = useDispatch()
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
+    
     return (
     <div>
+      <Headbar/>
       <h1>Login</h1>
       <form onSubmit={async e => {
         e.preventDefault();
@@ -27,7 +29,10 @@ export default function Login() {
         if (res.status === 200) {
           const user = await res.json ();
           dispatch(loggedIn(user.username))
+          console.log(user)
+          if (user.username === 'admin') {
           navigate('/edit')
+        } else navigate('/') 
         } else if (res.status === 400) {
           setError('密碼錯誤')
         } else if (res.status === 404) {

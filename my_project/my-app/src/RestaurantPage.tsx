@@ -3,15 +3,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Headbar from './Headbar'
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 
 interface Props{
     text:string
 }
-function RestaurantPage({text}:Props) {
+function RestaurantPage() {
     return (
         <Container>
-            {text}
+            <Headbar/>
             <Row>
                 <Col sm={8}>
                     <Row>
@@ -35,7 +36,7 @@ function RestaurantPage({text}:Props) {
                     </Button></div>
                 </Col>
             </Row>
-        <button><Link to='/'>back</Link></button>
+        {/* <button><Link to='/'>back</Link></button> */}
         </Container>
     );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
+import Headbar from './Headbar'
 
 export default function Edit() {
     const {handleSubmit, register} = useForm();
@@ -8,6 +9,7 @@ export default function Edit() {
 
     return (
         <div>
+          <Headbar />
       <h1>Edit</h1>
       <form onSubmit={handleSubmit(async data => {
         const formData = new FormData();
