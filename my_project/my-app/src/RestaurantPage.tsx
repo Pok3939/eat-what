@@ -11,13 +11,12 @@ interface Props{
 }
 function RestaurantPage() {
     return (
-        <Container>
-            <Headbar/>
+        <><div><Headbar /></div><div><Container>
             <Row>
                 <Col sm={8}>
                     <Row>
                         <Col sm={12}><img src='./Food1.jpg'></img></Col>
-                        
+
                     </Row>
                     <Row>
                         <Col sm={4}><img src='./Menu1.jpg'></img></Col>
@@ -36,8 +35,9 @@ function RestaurantPage() {
                     </Button></div>
                 </Col>
             </Row>
-        {/* <button><Link to='/'>back</Link></button> */}
-        </Container>
+            {/* <button><Link to='/'>back</Link></button> */}
+        </Container></div></>
+        
     );
 }
 

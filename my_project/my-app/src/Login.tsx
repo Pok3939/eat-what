@@ -41,7 +41,7 @@ export default function Login() {
       }}>
         {error}
         <input type="text" value={username} onChange={e => setUsername(e.currentTarget.value)}></input>
-        <input type="text" value={password} onChange={e => setPassword(e.currentTarget.value)}></input>
+        <input type="password" value={password} onChange={e => setPassword(e.currentTarget.value)}></input>
         <input type="submit"></input>
       </form>
     </div>
