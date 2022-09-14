@@ -1,50 +1,44 @@
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from 'react';
-import { css } from '@emotion/react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import './BootstrapGrid.css'
 import RestaurantPage from './RestaurantPage';
+import { css } from '@emotion/react';
+
+
 
 
 function BootstrapGrid() {
 
-    const [restaurant, setRestaurant] = useState<any[]>([]);
+    const [restaurants, setRestaurants] = useState<any[]>([]);
     useEffect(() => {
         async function main() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurant`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants`, {
                 credentials: 'include'
             })
             const json = await res.json();
 
-            setRestaurant(json)
+            setRestaurants(json)
         }
         main();
     }, [])
-    let arrays = [
-        { id: 1, photo1: "/restaurantpage1", photo2: "./grid1.jpg" },
-        { id: 2, photo1: "/restaurantpage2", photo2: "./grid2.jpg" },
-        { id: 3, photo1: "/restaurantpage3", photo2: "./grid3.jpg" },
-    ]
+
     return (
         <Container>
             <Row>
                 <Col>
-                    {arrays.map((elem) => (
-                        <Link key={elem.id} to={elem.photo1}>
-                            <img src={elem.photo2} />
-                        </Link>
-                    ))}
+
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <Link to='/restaurantpage4'>
-                        <div>
-                            {restaurant.map((user: any) => (
-                                <div css={css`img {width: 300px; height: 300px;}`}>
-                                    <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurant.restaurant_photo1}`} /></div>))} 
+                    <div>
+                            {restaurants.map((restaurants: any) => (
+                                <div>
+                                    <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants.restaurant_photo1}`} /></div>))} 
                         </div>
                         </Link>
                     <Link to='/restaurantpage5'>

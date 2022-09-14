@@ -1,24 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url("https://fonts.googleapis.com/css?family=Lobster");
 
 .App {
   text-align: center;
 }
 
-.Heading{
+.Heading {
   font-size: 5rem;
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
 }
-.BlackBar{
+.BlackBar {
   width: 100vw;
   height: 0.5rem;
   background-color: black;
 }
 
-.TickBox1{
+.TickBox1 {
   outline: 2px solid grey;
 }
 
-.RefreshButton >img {
-  width:3rem;
-  height:3rem;
+.RefreshButton > img {
+  width: 3rem;
+  height: 3rem;
 }
