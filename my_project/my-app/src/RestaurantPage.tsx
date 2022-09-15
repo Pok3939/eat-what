@@ -5,11 +5,24 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Headbar from './Headbar'
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-interface Props{
-    text:string
+interface Props {
+    text: string
 }
 function RestaurantPage() {
+    const [restaurants, setRestaurants] = useState<any[]>([]);
+    useEffect(() => {
+        async function main() {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants`, {
+                credentials: 'include'
+            })
+            const json = await res.json();
+
+            setRestaurants(json)
+        }
+        main();
+    }, [])
     return (
         <><div><Headbar /></div><div><Container>
             <Row>
@@ -26,6 +39,11 @@ function RestaurantPage() {
                 </Col>
                 <Col sm={4}>
                     <img src='./restaurant1.jpg'></img>
+                    <div>
+                        {restaurants.filter((restaurant) => (restaurant.id == '2')).map((restaurant) => <div>
+                            <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurant.restaurant_icon}`} /></div>)}
+
+                    </div>
                     <div className='RestaurantName'><h3>The Coffee Academics</h3></div>
                     <div className='PriceRange'><b>Price Range:</b>$50 - $100</div>
                     <div className='Address'><b>Address:</b>海港城 Shop 4201K, Level 4, Gateway Arcade, 3-27 Canton Rd, Tsim Sha Tsui</div>
@@ -37,7 +55,7 @@ function RestaurantPage() {
             </Row>
             {/* <button><Link to='/'>back</Link></button> */}
         </Container></div></>
-        
+
     );
 }
 

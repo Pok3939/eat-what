@@ -16,6 +16,7 @@ export async function seed(knex: Knex): Promise<void> {
     { text: "thai", value: 6 },
     { text: "middle_eastern", value: 7 },
     { text: "western", value: 8 },
+    { text: "vietnamese", value: 9 },
   ]);
 
   await knex("users").insert({

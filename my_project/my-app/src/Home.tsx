@@ -17,44 +17,45 @@ import { useSelector } from 'react-redux'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Refresh() {
-    alert('Refresh new photos');
-  } 
+  alert('Refresh new photos');
+}
 
 export default function Home() {
-    const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
-    console.log("isLoggedIn:",isLoggedIn);
-    
-    const dispatch = useDispatch()
-    const navigate = useNavigate();
-    return (
-      <div className="App">
-        <Headbar/>
-        <div className='dishChoice'>
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="台灣菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="日本菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="韓國菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="泰國菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中東菜" />
-          <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="西餐" />
+  const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
+  console.log("isLoggedIn:", isLoggedIn);
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  return (
+    <div className="App">
+      <Headbar />
+      <div className='dishChoice'>
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="台灣菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="日本菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="韓國菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="泰國菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中東菜" />
+        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="西餐" />
+      </div>
+
+      <header className="App-header">
+        <NavLink to="/login">Login</NavLink><br></br>
+        {!isLoggedIn && <NavLink to="/register">Register</NavLink>}<br></br>
+        {!isLoggedIn && <NavLink to="/edit">Edit</NavLink>}<br></br>
+        {!isLoggedIn && <NavLink to="/userrecord">Record</NavLink>}
+        <div className="GridPhoto">
+          <Container />
         </div>
-  
-        <header className="App-header">
-          <div className="GridPhoto">
-            <Container/>
-          </div>  
-          <div className='RefreshButton' onClick={Refresh}><img src ='./refresh.png'></img></div>
-          <NavLink to="/login">Login</NavLink><br></br>
-          { ! isLoggedIn && <NavLink to="/register">Register</NavLink> }<br></br>
-          { ! isLoggedIn && <NavLink to="/edit">Edit</NavLink> }<br></br>
-          { ! isLoggedIn && <NavLink to="/userrecord">Record</NavLink> }
-        { isLoggedIn === true && <a href="#" onClick={() => {
+        <div className='RefreshButton' onClick={Refresh}><img src='./refresh.png'></img></div>
+
+        {isLoggedIn === true && <a href="#" onClick={() => {
           dispatch(loggedOut());
           navigate('/')
-        }}>Logout</a> }
-        </header>
+        }}>Logout</a>}
+      </header>
       <Outlet />
-      </div>
-    );
-  }
+    </div>
+  );
+}
