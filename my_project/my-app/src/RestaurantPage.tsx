@@ -6,15 +6,24 @@ import Button from 'react-bootstrap/Button';
 import Headbar from './Headbar'
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import './RestaurantPage.css';
+import GoogleMapReact from './GoogleMap'
+interface Restaurants { id: number; restaurant_name: string; restaurant_icon: string; restaurant_phone: string; restaurant_address: string; restaurant_photo1: string; restaurant_photo2: string; restaurant_photo3: string; restaurant_menu: string }
 interface Props {
     text: string
 }
 function RestaurantPage() {
-    const [restaurants, setRestaurants] = useState<any[]>([]);
+    const [restaurants, setRestaurants] = useState<any>([]);
+
+
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const restaurantId = params.get('id');
+    // console.log(restaurantId);
+
     useEffect(() => {
         async function main() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants/${restaurantId}`, {
                 credentials: 'include'
             })
             const json = await res.json();
@@ -23,37 +32,34 @@ function RestaurantPage() {
         }
         main();
     }, [])
+    console.log(restaurants)
     return (
-        <><div><Headbar /></div><div><Container>
+        <><div><Headbar /></div><div><Container id='restaurantContainer'>
             <Row>
                 <Col sm={8}>
                     <Row>
-                        <Col sm={12}><img src='./Food1.jpg'></img></Col>
-
+                        <div className='restaurantPhoto1'>{restaurants[0] && <Col sm={12}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo1}`}></img></Col>}
+                        </div>
                     </Row>
                     <Row>
-                        <Col sm={4}><img src='./Menu1.jpg'></img></Col>
-                        <Col sm={4}><img src='./Food2.jpg'></img></Col>
-                        <Col sm={4}><img src='./Food3.jpg'></img></Col>
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_menu}`}></img></Col>}
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo2}`}></img></Col>}
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo3}`}></img></Col>}
                     </Row>
                 </Col>
                 <Col sm={4}>
-                    <img src='./restaurant1.jpg'></img>
-                    <div>
-                        {restaurants.filter((restaurant) => (restaurant.id == '2')).map((restaurant) => <div>
-                            <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurant.restaurant_icon}`} /></div>)}
-
+                    <div className='restaurantIcon'>
+                        {restaurants[0] && <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_icon}`}></img>}
                     </div>
-                    <div className='RestaurantName'><h3>The Coffee Academics</h3></div>
-                    <div className='PriceRange'><b>Price Range:</b>$50 - $100</div>
-                    <div className='Address'><b>Address:</b>海港城 Shop 4201K, Level 4, Gateway Arcade, 3-27 Canton Rd, Tsim Sha Tsui</div>
-                    <div className='GoogleMap'>GoogleMap</div>
+                    {/* <div className='RestaurantName'><h3>${restaurants.map((restaurants:any) =>(${restaurant.restaurant_name}}</h3></div> */}
+                    {restaurants[0] && <div className='Name'><b>Name:  </b>{restaurants[0].restaurant_name}</div>}
+                    {restaurants[0] && <div className='Address'><b>Address:  </b>{restaurants[0].restaurant_address}</div>}
+                    <div className='GoogleMap'><GoogleMapReact /></div>
                     <div className='ChooseThis'><Button variant="primary" size="lg">
                         就食呢間啦!
                     </Button></div>
                 </Col>
             </Row>
-            {/* <button><Link to='/'>back</Link></button> */}
         </Container></div></>
 
     );

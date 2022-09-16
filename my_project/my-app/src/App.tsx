@@ -27,15 +27,7 @@ function App() {
           <Route path="register" element={<Register />}></Route>
           <Route path="edit" element={<Edit />}></Route>
           <Route path="login" element={<Login />}></Route>
-          <Route path="/restaurantpage1" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage2" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage3" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage4" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage5" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage6" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage7" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage8" element={<RestaurantPage />}></Route>
-          <Route path="/restaurantpage9" element={<RestaurantPage />}></Route>
+          <Route path="/restaurantpage" element={<RestaurantPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>

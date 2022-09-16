@@ -176,12 +176,28 @@ app.get("/restaurants", async (req, res) => {
     )
     .from("restaurant");
 
-  // for (const restaurant of restaurants){
-  //     restaurant.dishes = await knex
-  //     .select('dishes_id')
-  //     .from('dishes_id')
-  //     .where('restaurant_id',restaurant.id);
-  // }
+  res.json(restaurants);
+});
+
+app.get("/restaurants/:id", async (req, res) => {
+  let id = req.params.id;
+  console.log("id:", id);
+
+  const restaurants: any = await knex
+    .select(
+      "id",
+      "restaurant_name",
+      "restaurant_icon",
+      "restaurant_phone",
+      "restaurant_address",
+      "restaurant_photo1",
+      "restaurant_photo2",
+      "restaurant_photo3",
+      "restaurant_menu"
+    )
+    .from("restaurant")
+    .where("id", id);
+
   res.json(restaurants);
 });
 

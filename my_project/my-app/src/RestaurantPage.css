@@ -1,0 +1,21 @@
+#restaurantContainer {
+  margin-top: 3rem;
+}
+
+.col-sm-12 > img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.col-sm-4 > img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.restaurantIcon > img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
