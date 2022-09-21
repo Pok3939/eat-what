@@ -8,8 +8,8 @@ import Headbar from './Headbar'
 import RestaurantPage from './RestaurantPage';
 import { Link, BrowserRouter, Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { loggedOut } from './auth/action'
-import { RootState } from './store'
+import { logOut } from './auth/action'
+import { RootState, useAppDispatch } from './store'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
@@ -24,7 +24,7 @@ export default function Home() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
   console.log("isLoggedIn:", isLoggedIn);
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
     <div className="App">
@@ -51,7 +51,7 @@ export default function Home() {
         <div className='RefreshButton' onClick={Refresh}><img src='./refresh.png'></img></div>
 
         {isLoggedIn === true && <a href="#" onClick={() => {
-          dispatch(loggedOut());
+          dispatch(logOut());
           navigate('/')
         }}>Logout</a>}
       </header>

@@ -8,6 +8,8 @@ import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './RestaurantPage.css';
 import GoogleMapReact from './GoogleMap'
+import { tokenToString } from 'typescript';
+import { useAppSelector } from './store';
 interface Restaurants { id: number; restaurant_name: string; restaurant_icon: string; restaurant_phone: string; restaurant_address: string; restaurant_photo1: string; restaurant_photo2: string; restaurant_photo3: string; restaurant_menu: string }
 interface Props {
     text: string
@@ -15,10 +17,10 @@ interface Props {
 function RestaurantPage() {
     const [restaurants, setRestaurants] = useState<any>([]);
 
-
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const restaurantId = params.get('id');
+    const token = useAppSelector(state => state.auth.token)
     // console.log(restaurantId);
 
     useEffect(() => {
@@ -55,9 +57,31 @@ function RestaurantPage() {
                     {restaurants[0] && <div className='Name'><b>Name:  </b>{restaurants[0].restaurant_name}</div>}
                     {restaurants[0] && <div className='Address'><b>Address:  </b>{restaurants[0].restaurant_address}</div>}
                     <div className='GoogleMap'><GoogleMapReact /></div>
-                    <div className='ChooseThis'><Button variant="primary" size="lg">
+                    {restaurants[0] && <div className='ChooseThis'><Button onClick={async () => {
+                        console.log("token:", token)
+                        console.log("tokenlocalstorage:", localStorage.getItem("token"))
+                        let ans = restaurants[0].restaurant_name
+                        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/userrecord`,
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${token}`,
+                                },
+                                credentials: 'include',
+                                body: JSON.stringify({ restaurant_name: ans })
+                            }
+                        )
+                        console.log(
+
+                            await res.json()
+                        );
+
+                    }
+                    } variant="primary" size="lg">
                         就食呢間啦!
-                    </Button></div>
+
+                    </Button></div>}
                 </Col>
             </Row>
         </Container></div></>

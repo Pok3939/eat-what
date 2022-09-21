@@ -1,7 +1,8 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import googleMarker from './googlemarker.png';
 
-const AnyReactComponent = ({ text }: { lat: number, lng: number, text: string, img: string }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }: { lat: number, lng: number, text: string }) => <div>{text}</div>;
 
 // const googleApiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY
 
@@ -26,8 +27,7 @@ export default function SimpleMap() {
 
                     lat={22.3233575}
                     lng={114.2114598}
-                    text="my marker"
-                    img=""
+                    text=""
                 />
             </GoogleMapReact>
         </div>

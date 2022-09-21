@@ -105,6 +105,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/jwt-simple@^0.5.33":
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/@types/jwt-simple/-/jwt-simple-0.5.33.tgz#fb839cabe81437954f7d0cd01760ad8096ec526e"
+  integrity sha512-RcVbKkbUP6u5yFd9HuLhCkAYlT1FQVZylNsxxgaVMZxMajwrVTmQei7C6yMXSoAkXJXpGOUtbsY6Q9kq3+p93g==
+
 "@types/mime@*":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-3.0.1.tgz#5f8f2bca0a5863cb69bc0b0acd88c96cb1d4ae10"
@@ -114,6 +119,13 @@
   version "18.7.14"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.14.tgz#0fe081752a3333392d00586d815485a17c2cf3c9"
   integrity sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==
+
+"@types/permit@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@types/permit/-/permit-0.2.2.tgz#5351d1d9b55d2d9eebc15a1f6302d6dfacc469ea"
+  integrity sha512-GXlSlXFN11zyFd708Hy84c96q9l/DxyY9COTzc3VxTaiH5kD0c57ri6jUkqyU7QP/hklbzvcOWtXAeKc8Xg/ww==
+  dependencies:
+    "@types/node" "*"
 
 "@types/pg@^8.6.5":
   version "8.6.5"
@@ -503,6 +515,11 @@ is-core-module@^2.9.0:
   dependencies:
     has "^1.0.3"
 
+jwt-simple@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/jwt-simple/-/jwt-simple-0.5.6.tgz#3357adec55b26547114157be66748995b75b333a"
+  integrity sha512-40aUybvhH9t2h71ncA1/1SbtTNCVZHgsTsTgqPUxGWDmUDrXyDf2wMNQKEbdBjbf4AI+fQhbECNTV6lWxQKUzg==
+
 knex@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/knex/-/knex-2.3.0.tgz#87fa2a9553d7cafb125d7a0645256fbe29ef5967"
@@ -633,6 +650,11 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==
+
+permit@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/permit/-/permit-0.2.4.tgz#3af2c8f5bd798f771be50eb59cecd1da6459a383"
+  integrity sha512-Mp2XTEMD3mPsZIWq3bp0claE4IxXKa4C6nhSDPZgGri8Q4CLjEjAQrP/xGKq2548a2KFENmA1V7W0Lob8kTuzw==
 
 pg-connection-string@2.5.0, pg-connection-string@^2.5.0:
   version "2.5.0"

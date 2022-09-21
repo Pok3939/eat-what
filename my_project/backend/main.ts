@@ -1,14 +1,19 @@
 import cors from "cors";
 import express from "express";
-import expressSession from "express-session";
+// import expressSession from "express-session";
 import { formidable } from "formidable";
 import Knex from "knex";
 import fs from "fs";
 import { checkPassword } from "./hash";
 import { hash } from "bcryptjs";
+import { Bearer } from "permit";
+import jwtSimple from "jwt-simple";
 
 const knexConfig = require("./knexfile");
 const knex = Knex(knexConfig[process.env.NODE_ENV ?? "development"]);
+const permit = new Bearer({
+  query: "access_token",
+});
 
 const uploadDir = __dirname + "/uploads";
 fs.mkdirSync(uploadDir, { recursive: true });
@@ -26,14 +31,17 @@ app.use(
     credentials: true,
   })
 );
+export interface User {
+  id: number;
+}
 
-app.use(
-  expressSession({
-    secret: process.env.EXPRESS_SESSION!,
-    saveUninitialized: true,
-    resave: false,
-  })
-);
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+  }
+}
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -115,8 +123,8 @@ app.post("/register", (req, res) => {
 app.get("/", (req, res) => {
   res.status(401).json({ result: "unauthorized" });
 });
-app.post("/login", async (req, res) => {
-  console.log(req.body.username);
+app.post("/login", async (req: express.Request, res: express.Response) => {
+  console.log(req.body);
   const user: any = await knex
     .select("id", "username", "password")
     .from("users")
@@ -126,8 +134,11 @@ app.post("/login", async (req, res) => {
   }
   console.log("req.body.password", req.body.password, user[0].password);
   if (await checkPassword(req.body.password, user[0].password)) {
-    req.session["userId"] = user[0].id;
-    return res.json({ id: user[0].id, username: user[0].username });
+    return res.json({
+      id: user[0].id,
+      username: user[0].username,
+      token: jwtSimple.encode({ userId: user[0].id }, "1234"),
+    });
   } else {
     return res.status(400).json({ result: "wrong_password" });
   }
@@ -138,29 +149,75 @@ const isLogin = (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  if (req.session["userId"]) {
-    next();
-  } else {
-    res.status(401).json({ result: "unauthorized" });
+  console.log(req.body);
+
+  const token = permit.check(req);
+  console.log(token);
+
+  try {
+    const payload = jwtSimple.decode(token, "1234");
+    if (payload["userId"]) {
+      console.log("payload:", payload["userId"]);
+
+      req.user = {
+        id: payload["userId"],
+      };
+      console.log("req.user in islogin:", req.user.id);
+
+      next();
+    } else {
+      res.status(401).json({ result: "unauthorized" });
+    }
+  } catch (e) {
+    res.status(401).json({ result: "incorrect_token" });
   }
 };
+
+app.get("/users/me", isLogin, async (req, res) => {
+  console.log("me", req.user!.id);
+
+  const users = await knex
+    .select("id")
+    .from("users")
+    .where("id", "!=", req.user!.id);
+
+  res.json(users[0]);
+});
 
 app.get("/users", isLogin, async (req, res) => {
   const users = await knex
     .select("id")
     .from("users")
-    .where("id", "!=", req.session["userId"]);
-
-  // for (const user of users) {
-  //   user.languages = await knex
-  //     .select("programming_language_id")
-  //     .from("users_programming_languages")
-  //     .where("user_id", user.id);
-  // }
+    .where("id", "!=", req.user!.id);
 
   res.json(users);
 });
 
+app.post("/userrecord", isLogin, async (req, res) => {
+  console.log("hi");
+
+  console.log("newrecord", req.user!.id);
+  const abc = req.body.restaurant_name;
+  console.log(abc);
+
+  const users = await knex("userrecord")
+    // .select("restaurant_name")
+    // .from("restaurant")
+    // .where("id", "!=", req.user!.id)
+    .insert({
+      restaurant_name: req.body.restaurant_name,
+    })
+    .into("userrecord");
+
+  res.json(users);
+});
+
+app.get("/recordcheck", isLogin, async (req, res) => {
+  const recordchecks = await knex
+    .select("restaurant_name", "created_at")
+    .from("userrecord");
+  res.json(recordchecks);
+});
 app.get("/restaurants", async (req, res) => {
   const restaurants = await knex
     .select(
@@ -181,7 +238,7 @@ app.get("/restaurants", async (req, res) => {
 
 app.get("/restaurants/:id", async (req, res) => {
   let id = req.params.id;
-  console.log("id:", id);
+  console.log("restaurantid:", id);
 
   const restaurants: any = await knex
     .select(

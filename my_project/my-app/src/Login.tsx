@@ -5,18 +5,19 @@ import { loggedIn } from './auth/action';
 import Headbar from './Headbar'
 
 export default function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const dispatch = useDispatch()
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
-    
-    return (
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch()
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  return (
     <div>
-      <Headbar/>
+      <Headbar />
       <h1>Login</h1>
       <form onSubmit={async e => {
         e.preventDefault();
+        console.log(username);
 
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
           method: 'POST',
@@ -24,15 +25,16 @@ export default function Login() {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
-          body: JSON.stringify({username, password})
+          body: JSON.stringify({ username, password })
         });
         if (res.status === 200) {
-          const user = await res.json ();
-          dispatch(loggedIn(user.username))
+          const user = await res.json();
+          dispatch(loggedIn(user.username, user.token));
+          localStorage.setItem("token", user.token);
           console.log(user)
           if (user.username === 'admin') {
-          navigate('/edit')
-        } else navigate('/') 
+            navigate('/edit')
+          } else navigate('/')
         } else if (res.status === 400) {
           setError('密碼錯誤')
         } else if (res.status === 404) {
@@ -45,5 +47,5 @@ export default function Login() {
         <input type="submit"></input>
       </form>
     </div>
-    )
+  )
 }
