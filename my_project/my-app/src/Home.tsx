@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Container from './BootstrapGrid';
 import Headbar from './Headbar'
 import RestaurantPage from './RestaurantPage';
@@ -12,7 +10,7 @@ import { logOut } from './auth/action'
 import { RootState, useAppDispatch } from './store'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-
+import Tickbox from './Tickbox'
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -20,26 +18,18 @@ function Refresh() {
   alert('Refresh new photos');
 }
 
+
+
 export default function Home() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
-  console.log("isLoggedIn:", isLoggedIn);
-
+  // console.log("isLoggedIn:", isLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   return (
     <div className="App">
       <Headbar />
-      <div className='dishChoice'>
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="港式" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="台灣菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="日本菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="韓國菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="泰國菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="中東菜" />
-        <FormControlLabel className="TickBox1" control={<Checkbox defaultChecked />} label="西餐" />
-      </div>
-
+      <Tickbox />
       <header className="App-header">
         <NavLink to="/login">Login</NavLink><br></br>
         {!isLoggedIn && <NavLink to="/register">Register</NavLink>}<br></br>

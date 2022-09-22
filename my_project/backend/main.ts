@@ -206,6 +206,7 @@ app.post("/userrecord", isLogin, async (req, res) => {
     // .where("id", "!=", req.user!.id)
     .insert({
       restaurant_name: req.body.restaurant_name,
+      user_id: req.user!.id,
     })
     .into("userrecord");
 
@@ -214,14 +215,15 @@ app.post("/userrecord", isLogin, async (req, res) => {
 
 app.get("/recordcheck", isLogin, async (req, res) => {
   const recordchecks = await knex
-    .select("restaurant_name", "created_at")
-    .from("userrecord");
+    .select("restaurant_name", "created_at", "user_id")
+    .from("userrecord")
+    .where("user_id", req.user!.id);
   res.json(recordchecks);
 });
 app.get("/restaurants", async (req, res) => {
   const restaurants = await knex
     .select(
-      "id",
+      "restaurant.id",
       "restaurant_name",
       "restaurant_icon",
       "restaurant_phone",
@@ -229,10 +231,13 @@ app.get("/restaurants", async (req, res) => {
       "restaurant_photo1",
       "restaurant_photo2",
       "restaurant_photo3",
-      "restaurant_menu"
+      "restaurant_menu",
+      "restaurant_dishes_id",
+      "text"
     )
-    .from("restaurant");
-
+    .from("restaurant")
+    .join("dishes_id", "dishes_id.id", "restaurant.restaurant_dishes_id")
+    .whereIn("restaurant_dishes_id", [1, 2, 3, 4, 5, 6, 7, 8, 9]);
   res.json(restaurants);
 });
 
@@ -252,8 +257,7 @@ app.get("/restaurants/:id", async (req, res) => {
       "restaurant_photo3",
       "restaurant_menu"
     )
-    .from("restaurant")
-    .where("id", id);
+    .from("restaurant");
 
   res.json(restaurants);
 });

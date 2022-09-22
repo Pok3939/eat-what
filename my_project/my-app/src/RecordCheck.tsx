@@ -3,12 +3,17 @@ import Headbar from './Headbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useAppSelector } from "./store";
 
 function RecordCheck() {
     const [recordchecks, setRecordchecks] = useState<any>([]);
+    const token = useAppSelector(state => state.auth.token)
     useEffect(() => {
         async function main() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/recordcheck`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
                 credentials: 'include'
             })
             const json = await res.json();
@@ -23,12 +28,14 @@ function RecordCheck() {
             <Row>
                 <Col sm={6}>
                     <div className='restaurantName1'>
-                        {recordchecks.map((recordcheck: string) => (
-                            <div className='Name'><b>Name:  </b>{recordchecks.restaurant_name}</div>
+                        {recordchecks.map((recordcheck: any) => (
+                            <div className='Name'><b>Name:  </b>{recordcheck.restaurant_name}</div>
                         ))}</div>
                 </Col>
                 <Col sm={6}>
-                    <div className='createTime'></div>
+                    {recordchecks.map((recordcheck: any) => (
+                        <div className='createTime'><b>Created at:</b>{recordcheck.created_at} </div>
+                    ))}
                 </Col>
             </Row>
         </Container></>
