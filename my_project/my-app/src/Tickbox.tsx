@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { CheckboxGroup, Checkbox, Provider, defaultTheme } from '@adobe/react-spectrum'
+import { CheckboxGroup, Checkbox, Provider, defaultTheme, Flex } from '@adobe/react-spectrum'
+import Button from 'react-bootstrap/Button';
 import React from "react";
 
 
@@ -30,15 +31,17 @@ export default function Tickbox() {
                         value={selected}
                         onChange={setSelected}
                     >
-                        <Checkbox value="1">{restaurants[0].text}</Checkbox>
-                        <Checkbox value="2">{restaurants[1].text}</Checkbox>
-                        <Checkbox value="3">{restaurants[2].text}</Checkbox>
-                        <Checkbox value="4">{restaurants[3].text}</Checkbox>
-                        <Checkbox value="5">{restaurants[4].text}</Checkbox>
-                        <Checkbox value="6">{restaurants[5].text}</Checkbox>
-                        <Checkbox value="7">{restaurants[6].text}</Checkbox>
-                        <Checkbox value="8">{restaurants[7].text}</Checkbox>
-                        <Checkbox value="9">{restaurants[8].text}</Checkbox>
+                        <Flex direction="row">
+                            <Checkbox value={restaurants[0].id.toString()}>{restaurants[0].text}</Checkbox>
+                            <Checkbox value={restaurants[1].id.toString()}>{restaurants[1].text}</Checkbox>
+                            <Checkbox value={restaurants[2].id.toString()}>{restaurants[2].text}</Checkbox>
+                            <Checkbox value={restaurants[3].id.toString()}>{restaurants[3].text}</Checkbox>
+                            <Checkbox value={restaurants[4].id.toString()}>{restaurants[4].text}</Checkbox>
+                            <Checkbox value={restaurants[5].id.toString()}>{restaurants[5].text}</Checkbox>
+                            <Checkbox value={restaurants[6].id.toString()}>{restaurants[6].text}</Checkbox>
+                            <Checkbox value={restaurants[7].id.toString()}>{restaurants[7].text}</Checkbox>
+                            <Checkbox value={restaurants[8].id.toString()}>{restaurants[8].text}</Checkbox>
+                        </Flex>
 
                     </CheckboxGroup>
 
@@ -47,6 +50,14 @@ export default function Tickbox() {
 
             }
         </Provider>
+            <div className='tickBoxButton'>
+                <Button onClick={() => {
+                    localStorage.setItem('tickedValue', selected)
+                }
+                }>
+
+                </Button>
+            </div>
         </>
     )
 

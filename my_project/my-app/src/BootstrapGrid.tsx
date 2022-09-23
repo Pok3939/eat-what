@@ -12,9 +12,14 @@ import RestaurantPage from './RestaurantPage';
 function BootstrapGrid() {
 
     const [restaurants, setRestaurants] = useState<any[]>([]);
+    let text: any = localStorage.getItem('tickedValue');
+    const myArray = text.split(" ");
+    var paramName = 'array=';
+    var arrayAsString = '?' + paramName + myArray.join('&' + paramName);
+    console.log(arrayAsString)
     useEffect(() => {
         async function main() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants${arrayAsString}`, {
                 credentials: 'include'
             })
             const json = await res.json();
@@ -37,7 +42,7 @@ function BootstrapGrid() {
             setRestaurants(json.slice(0, 9))
         }
         main();
-    }, [])
+    }, [text])
 
     return (
         <Container id='gridContainer'>

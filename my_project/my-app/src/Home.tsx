@@ -26,6 +26,8 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+
+
   return (
     <div className="App">
       <Headbar />

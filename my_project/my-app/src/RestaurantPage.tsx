@@ -19,10 +19,9 @@ function RestaurantPage() {
 
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const restaurantId = params.get('id');
+    var restaurantId: any = params.get('id');
     const token = useAppSelector(state => state.auth.token)
-    // console.log(restaurantId);
-
+    console.log("currentId", restaurantId);
     useEffect(() => {
         async function main() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants/${restaurantId}`, {
@@ -34,33 +33,36 @@ function RestaurantPage() {
         }
         main();
     }, [])
-    console.log(restaurants)
+    console.log("wrongOne", restaurants[0]);
+    var realId = restaurantId - 2;
+    if (restaurantId < 2) { realId = 0 } else if (restaurantId < 3) { realId = 1 }
+    console.log("realId", realId)
     return (
         <><div><Headbar /></div><div><Container id='restaurantContainer'>
             <Row>
                 <Col sm={8}>
                     <Row>
-                        <div className='restaurantPhoto1'>{restaurants[0] && <Col sm={12}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo1}`}></img></Col>}
+                        <div className='restaurantPhoto1'>{restaurants[0] && <Col sm={12}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[realId].restaurant_photo1}`}></img></Col>}
                         </div>
                     </Row>
                     <Row>
-                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_menu}`}></img></Col>}
-                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo2}`}></img></Col>}
-                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_photo3}`}></img></Col>}
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[realId].restaurant_menu}`}></img></Col>}
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[realId].restaurant_photo2}`}></img></Col>}
+                        {restaurants[0] && <Col sm={4}><img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[realId].restaurant_photo3}`}></img></Col>}
                     </Row>
                 </Col>
                 <Col sm={4}>
                     <div className='restaurantIcon'>
-                        {restaurants[0] && <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[0].restaurant_icon}`}></img>}
+                        {restaurants[0] && <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${restaurants[realId].restaurant_icon}`}></img>}
                     </div>
                     {/* <div className='RestaurantName'><h3>${restaurants.map((restaurants:any) =>(${restaurant.restaurant_name}}</h3></div> */}
-                    {restaurants[0] && <div className='Name'><b>Name:  </b>{restaurants[0].restaurant_name}</div>}
-                    {restaurants[0] && <div className='Address'><b>Address:  </b>{restaurants[0].restaurant_address}</div>}
+                    {restaurants[0] && <div className='Name'><b>Name:  </b>{restaurants[realId].restaurant_name}</div>}
+                    {restaurants[0] && <div className='Address'><b>Address:  </b>{restaurants[realId].restaurant_address}</div>}
                     <div className='GoogleMap'><GoogleMapReact /></div>
                     {restaurants[0] && <div className='ChooseThis'><Button onClick={async () => {
                         console.log("token:", token)
                         console.log("tokenlocalstorage:", localStorage.getItem("token"))
-                        let ans = restaurants[0].restaurant_name
+                        let ans = restaurants[realId].restaurant_name
                         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/userrecord`,
                             {
                                 method: 'POST',
