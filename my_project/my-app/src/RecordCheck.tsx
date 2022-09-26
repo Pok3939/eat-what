@@ -7,7 +7,8 @@ import { useAppSelector } from "./store";
 
 function RecordCheck() {
     const [recordchecks, setRecordchecks] = useState<any>([]);
-    const token = useAppSelector(state => state.auth.token)
+    const token = localStorage.getItem("token")
+    console.log(token)
     useEffect(() => {
         async function main() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/recordcheck`, {

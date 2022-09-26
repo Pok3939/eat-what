@@ -42,7 +42,7 @@ export default function Home() {
           // text={ } 
           />
         </div>
-        <div className='RefreshButton' onClick={Refresh}><img src='./refresh.png'></img></div>
+
 
         {isLoggedIn === true && <a href="#" onClick={() => {
           dispatch(logOut());

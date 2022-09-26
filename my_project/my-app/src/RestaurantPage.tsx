@@ -21,7 +21,7 @@ function RestaurantPage() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     var restaurantId: any = params.get('id');
-    const token = useAppSelector(state => state.auth.token)
+    const token = localStorage.getItem("token")
     console.log("currentId", restaurantId);
     useEffect(() => {
         async function main() {

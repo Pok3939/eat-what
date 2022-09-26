@@ -156,6 +156,8 @@ const isLogin = (
 
   try {
     const payload = jwtSimple.decode(token, "1234");
+    console.log("payload", payload);
+
     if (payload["userId"]) {
       console.log("payload:", payload["userId"]);
 
@@ -223,10 +225,20 @@ app.get("/recordcheck", isLogin, async (req, res) => {
 app.get("/restaurants", async (req, res) => {
   let arrayUrl: any;
   // let myArray: any;
-  if (req.query.array) {
+  // console.log("Q?", req.query.array);
+  Array.isArray(req.query.array);
+
+  if (Array.isArray(req.query.array)) {
     arrayUrl = req.query.array;
     console.log("get?", arrayUrl);
+
+    //array.isArray//
     // myArray = arrayUrl!.split(",");
+  } else {
+    arrayUrl = req.query.array;
+    // arrayUrl = arrayUrl.push(req.query.array);
+    arrayUrl = arrayUrl!.split(",");
+    console.log("Hi", arrayUrl);
   }
 
   const restaurants = await knex

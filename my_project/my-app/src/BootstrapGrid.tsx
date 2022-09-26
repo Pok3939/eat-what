@@ -32,30 +32,31 @@ function BootstrapGrid() {
 
     }, [])
     console.log(arrayAsString)
-    useEffect(() => {
-        async function main() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants${arrayAsString}`, {
-                credentials: 'include'
-            })
-            const json = await res.json();
-            function shuffle(array: any[]) {
-                let currentIndex = array.length, randomIndex;
+    async function main() {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants${arrayAsString}`, {
+            credentials: 'include'
+        })
+        const json = await res.json();
+        function shuffle(array: any[]) {
+            let currentIndex = array.length, randomIndex;
 
-                while (currentIndex != 0) {
+            while (currentIndex != 0) {
 
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
 
-                    [array[currentIndex], array[randomIndex]] = [
-                        array[randomIndex], array[currentIndex]];
-                }
-
-                return array;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
             }
 
-            shuffle(json);
-            setRestaurants(json.slice(0, 9))
+            return array;
         }
+
+        shuffle(json);
+        setRestaurants(json.slice(0, 9))
+    }
+    useEffect(() => {
+
         main();
     }, [text])
 
@@ -66,8 +67,7 @@ function BootstrapGrid() {
             {dishes[0] &&
                 <div className='dishChoice'>
                     <CheckboxGroup
-                        label="Dishes"
-                        defaultValue={["1", "2"]}
+                        // defaultValue={["1", "2"]}
                         value={selected}
                         onChange={setSelected}
                     >
@@ -96,6 +96,7 @@ function BootstrapGrid() {
 
                 </Button>
             </div> */}
+            <div className='RefreshButton' onClick={() => main()}><img src='./refresh.png'></img></div>
             <Container id='gridContainer'>
 
                 {restaurants.map((restaurant: any) => (
@@ -105,6 +106,7 @@ function BootstrapGrid() {
                     </Link>))}
 
             </Container></>
+
     );
 }
 
