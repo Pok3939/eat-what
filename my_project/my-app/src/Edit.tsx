@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import DropdownExampleClearable from './Dropdown';
 // import Headbar from './Headbar';
@@ -63,7 +63,7 @@ export default function Edit() {
 
         <input type="submit"></input>
       </form>
-
+      <NavLink to="/">返回主頁</NavLink>
     </div>
   )
 }

@@ -222,11 +222,11 @@ app.get("/recordcheck", isLogin, async (req, res) => {
 });
 app.get("/restaurants", async (req, res) => {
   let arrayUrl: any;
-  let myArray: any;
+  // let myArray: any;
   if (req.query.array) {
     arrayUrl = req.query.array;
-    myArray = arrayUrl!.split(",");
-    console.log(myArray);
+    console.log("get?", arrayUrl);
+    // myArray = arrayUrl!.split(",");
   }
 
   const restaurants = await knex
@@ -246,7 +246,7 @@ app.get("/restaurants", async (req, res) => {
     .from("restaurant")
     .join("dishes_id", "dishes_id.id", "restaurant.restaurant_dishes_id")
 
-    .whereIn("restaurant_dishes_id", myArray);
+    .whereIn("restaurant_dishes_id", arrayUrl);
   res.json(restaurants);
 });
 

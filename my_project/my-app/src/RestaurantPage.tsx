@@ -9,14 +9,15 @@ import { useEffect, useState } from 'react';
 import './RestaurantPage.css';
 import GoogleMapReact from './GoogleMap'
 import { tokenToString } from 'typescript';
-import { useAppSelector } from './store';
+import { RootState, useAppSelector } from './store';
+import { useSelector } from 'react-redux';
 interface Restaurants { id: number; restaurant_name: string; restaurant_icon: string; restaurant_phone: string; restaurant_address: string; restaurant_photo1: string; restaurant_photo2: string; restaurant_photo3: string; restaurant_menu: string }
 interface Props {
     text: string
 }
 function RestaurantPage() {
     const [restaurants, setRestaurants] = useState<any>([]);
-
+    const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
     const search = window.location.search;
     const params = new URLSearchParams(search);
     var restaurantId: any = params.get('id');
@@ -59,7 +60,8 @@ function RestaurantPage() {
                     {restaurants[0] && <div className='Name'><b>Name:  </b>{restaurants[realId].restaurant_name}</div>}
                     {restaurants[0] && <div className='Address'><b>Address:  </b>{restaurants[realId].restaurant_address}</div>}
                     <div className='GoogleMap'><GoogleMapReact /></div>
-                    {restaurants[0] && <div className='ChooseThis'><Button onClick={async () => {
+                    {isLoggedIn && restaurants[0] && <div className='ChooseThis'><Button onClick={async () => {
+                        alert("已寫入飲食紀錄!")
                         console.log("token:", token)
                         console.log("tokenlocalstorage:", localStorage.getItem("token"))
                         let ans = restaurants[realId].restaurant_name

@@ -24,19 +24,20 @@ function RecordCheck() {
     }, [])
     return (
 
-        <><div><Headbar /></div><Container id='recordContainer'>
+        <><div><Headbar /></div> <Container id='recordContainer'>
             <Row>
-                <Col sm={6}>
+                {recordchecks[0] && <Col sm={6}>
                     <div className='restaurantName1'>
                         {recordchecks.map((recordcheck: any) => (
-                            <div className='Name'><b>Name:  </b>{recordcheck.restaurant_name}</div>
+                            <div className='Name'><b>餐廳: </b>{recordcheck.restaurant_name}</div>
                         ))}</div>
-                </Col>
-                <Col sm={6}>
-                    {recordchecks.map((recordcheck: any) => (
-                        <div className='createTime'><b>Created at:</b>{recordcheck.created_at} </div>
-                    ))}
-                </Col>
+                </Col>}
+                {recordchecks[0] && <Col sm={6}>
+                    <div className='restaurantTime1'>
+                        {recordchecks.map((recordcheck: any) => (
+                            <div className='createTime'><b>到訪日期: </b>{recordcheck.created_at} </div>
+                        ))}</div>
+                </Col>}
             </Row>
         </Container></>
     )

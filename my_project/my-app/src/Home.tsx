@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Container from './BootstrapGrid';
+import BootstrapGrid from './BootstrapGrid';
 import Headbar from './Headbar'
 import RestaurantPage from './RestaurantPage';
 import { Link, BrowserRouter, Routes, Route, Outlet, useNavigate } from 'react-router-dom';
@@ -10,10 +10,9 @@ import { logOut } from './auth/action'
 import { RootState, useAppDispatch } from './store'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import Tickbox from './Tickbox'
+// import Tickbox from './Tickbox'
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 function Refresh() {
   alert('Refresh new photos');
 }
@@ -25,27 +24,30 @@ export default function Home() {
   // console.log("isLoggedIn:", isLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-
+  //-----------//
+  // let text: any = localStorage.getItem('tickedValue')
+  // const myArray = text.split(" ");
+  //-----------//
 
   return (
     <div className="App">
       <Headbar />
-      <Tickbox />
       <header className="App-header">
-        <NavLink to="/login">Login</NavLink><br></br>
-        {!isLoggedIn && <NavLink to="/register">Register</NavLink>}<br></br>
-        {!isLoggedIn && <NavLink to="/edit">Edit</NavLink>}<br></br>
-        {!isLoggedIn && <NavLink to="/userrecord">Record</NavLink>}
+        {!isLoggedIn && <NavLink to="/login">登入</NavLink>}<br></br>
+        {!isLoggedIn && <NavLink to="/register">註冊 </NavLink>}
+        {isLoggedIn && <NavLink to="/edit">新增</NavLink>}<br></br>
+        {isLoggedIn && <NavLink to="/recordcheck">飲食紀錄</NavLink>}
         <div className="GridPhoto">
-          <Container />
+          <BootstrapGrid
+          // text={ } 
+          />
         </div>
         <div className='RefreshButton' onClick={Refresh}><img src='./refresh.png'></img></div>
 
         {isLoggedIn === true && <a href="#" onClick={() => {
           dispatch(logOut());
           navigate('/')
-        }}>Logout</a>}
+        }}>登出</a>}
       </header>
       <Outlet />
     </div>
