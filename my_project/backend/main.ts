@@ -228,17 +228,14 @@ app.get("/restaurants", async (req, res) => {
   // console.log("Q?", req.query.array);
   Array.isArray(req.query.array);
 
-  if (Array.isArray(req.query.array)) {
+  if (Array.isArray(req.query.array) && req.query.array.length >= 1) {
     arrayUrl = req.query.array;
-    console.log("get?", arrayUrl);
-
-    //array.isArray//
-    // myArray = arrayUrl!.split(",");
+  } else if (!Array.isArray(req.query.array) && req.query.array == "") {
+    arrayUrl = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   } else {
     arrayUrl = req.query.array;
     // arrayUrl = arrayUrl.push(req.query.array);
     arrayUrl = arrayUrl!.split(",");
-    console.log("Hi", arrayUrl);
   }
 
   const restaurants = await knex
