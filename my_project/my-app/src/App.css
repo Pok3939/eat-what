@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  font-size: 1.2rem;
 }
 
 .Heading {
@@ -21,4 +22,16 @@
 .RefreshButton > img {
   width: 3rem;
   height: 3rem;
+}
+
+.Checkbox {
+  font-size: 3rem;
+}
+
+.dishChoice {
+  font-size: 2rem !important;
+}
+
+.gMap {
+  transform-origin: bottom;
 }

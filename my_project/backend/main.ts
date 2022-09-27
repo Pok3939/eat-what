@@ -276,9 +276,12 @@ app.get("/restaurants/:id", async (req, res) => {
       "restaurant_photo1",
       "restaurant_photo2",
       "restaurant_photo3",
-      "restaurant_menu"
+      "restaurant_menu",
+      "lat",
+      "lng"
     )
-    .from("restaurant");
+    .from("restaurant")
+    .where("id", id);
 
   res.json(restaurants);
 });

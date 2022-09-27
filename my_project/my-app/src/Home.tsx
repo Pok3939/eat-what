@@ -32,11 +32,14 @@ export default function Home() {
   return (
     <div className="App">
       <Headbar />
-      <header className="App-header">
+      <div className="basicFunction">
         {!isLoggedIn && <NavLink to="/login">登入</NavLink>}<br></br>
         {!isLoggedIn && <NavLink to="/register">註冊 </NavLink>}
-        {isLoggedIn && <NavLink to="/edit">新增</NavLink>}<br></br>
+        {/* {isLoggedIn && <NavLink to="/edit">新增</NavLink>}<br></br> */}
         {isLoggedIn && <NavLink to="/recordcheck">飲食紀錄</NavLink>}
+      </div>
+      <header className="App-header">
+
         <div className="GridPhoto">
           <BootstrapGrid
           // text={ } 
