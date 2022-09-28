@@ -23,7 +23,7 @@ export default function Edit() {
   return (
     <div>
       {/* <Headbar /> */}
-      <h1>Edit</h1>
+      <h1>新增餐廳資料</h1>
       <form onSubmit={handleSubmit(async data => {
         const formData = new FormData();
         formData.append('restaurant_name', data.restaurant_name)
@@ -35,6 +35,8 @@ export default function Edit() {
         formData.append('restaurant_photo3', data.restaurant_photo3[0])
         formData.append('restaurant_menu', data.restaurant_menu[0])
         formData.append('restaurant_dishes_id', data.restaurant_dishes_id[0])
+        formData.append('lat', data.lat)
+        formData.append('lat', data.lng)
         console.log("formData:", formData)
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/edit`, {
           method: 'POST',
@@ -45,14 +47,16 @@ export default function Edit() {
           navigate('/')
         }
       })}>
-        Restaurant_Name: <input {...register('restaurant_name', { required: true })}></input><br></br>
-        Restaurant_Icon: <input type="file" {...register('restaurant_icon', { required: true })}></input><br></br>
-        Restaurant_Phone:<input {...register('restaurant_phone', { required: true })}></input><br></br>
-        Restaurant_Address:<input {...register('restaurant_address', { required: true })}></input><br></br>
-        Restaurant_Photo1:<input type="file" {...register('restaurant_photo1', { required: true })}></input><br></br>
-        Restaurant_Photo2:<input type="file" {...register('restaurant_photo2', { required: true })}></input><br></br>
-        Restaurant_Photo3:<input type="file" {...register('restaurant_photo3', { required: true })}></input><br></br>
-        Restaurant_Menu:<input type="file" {...register('restaurant_menu', { required: true })}></input><br></br>
+        餐廳名稱: <input {...register('restaurant_name', { required: true })}></input><br></br>
+        餐廳門面: <input type="file" {...register('restaurant_icon', { required: true })}></input><br></br>
+        餐廳電話:<input {...register('restaurant_phone', { required: true })}></input><br></br>
+        餐廳地址:<input {...register('restaurant_address', { required: true })}></input><br></br>
+        餐廳圖片1:<input type="file" {...register('restaurant_photo1', { required: true })}></input><br></br>
+        餐廳圖片2:<input type="file" {...register('restaurant_photo2', { required: true })}></input><br></br>
+        餐廳圖片3:<input type="file" {...register('restaurant_photo3', { required: true })}></input><br></br>
+        餐廳菜單:<input type="file" {...register('restaurant_menu', { required: true })}></input><br></br>
+        緯度:<input {...register('lat', { required: true })}></input><br></br>
+        經度:<input {...register('lng', { required: true })}></input><br></br>
         <select {...register("restaurant_dishes_id")}>
           {dishes.map(dish => (<option value={`${dish.value}`}>{dish.text}</option>))
             // <option value="female">female</option>

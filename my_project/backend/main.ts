@@ -80,6 +80,8 @@ app.post("/edit", (req: any, res: any) => {
           restaurant_photo3: file4.newFilename,
           restaurant_menu: file5.newFilename,
           restaurant_dishes_id: fields["restaurant_dishes_id"],
+          lat: fields["lat"],
+          lng: fields["lng"],
         })
         .into("restaurant")
         .returning("id");
@@ -121,7 +123,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(401).json({ result: "unauthorized" });
+  res.json("Hello");
 });
 app.post("/login", async (req: express.Request, res: express.Response) => {
   console.log(req.body);

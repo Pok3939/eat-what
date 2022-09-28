@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+    db:
+        image: "postgres:13"
+        environment:
+            POSTGRES_USER: eat-what
+            POSTGRES_PASSWORD: 760315
+            POSTGRES_DB: eat-what
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+
+    backend:
+        environment: 
+            DB_USER: eat-what
+            DB_PASS: 760315
+            DB_NAME: eat-what
+            DB_HOST: db
+            REACT_DOMAIN: "http://enjoy.eatwhat.me"
+            NODE_ENV: production
+            PORT: 8080
+        depends_on: 
+            - db
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        image: "eatwhat:latest"
+        ports:
+            - "8080:8080"
